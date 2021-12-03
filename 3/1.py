@@ -1,28 +1,25 @@
 
-
-
 #gamma - most common bits
 #epsilon - least common bits
 
-calc = [0,0,0,0,0,0,0,0,0,0,0,0]
-
-for line in open('3\input.txt'):
-    for index, char in enumerate(line[:-1]):
-        if char == '1':
-            calc[index] += 1
+gamma = epsilon = ''
+tmp=0
+for index in range(0,12):
+    for line in open('3\input.txt'):
+        if line[index] == '1':
+            tmp += 1
         else:
-            calc[index] -= 1
+            tmp -= 1
 
-gamma = 0
-for index, item in enumerate(calc[::-1]):
-    if item > 0:
-        gamma+=2**index
+    if tmp > 0:
+        gamma += '1'
+        epsilon += '0'
+    else:
+        gamma += '0'
+        epsilon += '1'
 
-epsilon = 0
-for index, item in enumerate(calc[::-1]):
-    if item < 0:
-        epsilon+=2**index
+    tmp = 0
 
-print(gamma * epsilon)
+print(int(gamma, 2) * int(epsilon, 2))
 
 #4160394
