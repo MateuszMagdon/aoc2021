@@ -29,14 +29,6 @@ while len(co2_lines) > 1:
     
     index+=1
 
-oxygen = 0
-for index, item in enumerate(oxygen_lines[0][::-1]):
-    if item == '1':
-        oxygen+=2**index
+print(int(oxygen_lines[0], 2)* int(co2_lines[0], 2))
 
-co2 = 0
-for index, item in enumerate(co2_lines[0][::-1]):
-    if item == '1':
-        co2+=2**index
-
-print(oxygen* co2)
+#4125600

@@ -24,3 +24,5 @@ for index, item in enumerate(calc[::-1]):
         epsilon+=2**index
 
 print(gamma * epsilon)
+
+#4160394
