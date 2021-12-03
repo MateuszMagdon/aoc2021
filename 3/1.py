@@ -3,8 +3,8 @@
 #epsilon - least common bits
 
 gamma = epsilon = ''
-tmp=0
 for index in range(0,12):
+    tmp = 0
     for line in open('3\input.txt'):
         if line[index] == '1':
             tmp += 1
@@ -17,8 +17,6 @@ for index in range(0,12):
     else:
         gamma += '0'
         epsilon += '1'
-
-    tmp = 0
 
 print(int(gamma, 2) * int(epsilon, 2))
 
