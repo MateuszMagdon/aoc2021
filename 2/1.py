@@ -1,7 +1,6 @@
 
 
-x=0
-y=0
+x = y = 0
 
 for line in open('2\input.txt'):
     match line.split():
