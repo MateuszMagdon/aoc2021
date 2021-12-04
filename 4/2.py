@@ -1,13 +1,24 @@
-def playBingo(inputs, tables):
+
+def playBingo(inputs, tables_input):
+    tables = tables_input[:]
+    tables_number = len(tables)
+    winners = 0
+
     for input in inputs:
-        for table in tables:
+        for tab_index, table in enumerate(tables):
             for row in table:
                 for index, el in enumerate(row):
                     if el == input:
                         row[index] = str(el)
 
                         if checkIfWinner(table):
-                            return countWinningNumber(table, input)
+                            winners += 1
+                            if winners == tables_number:
+                                return countWinningNumber(table, input)
+                            tables[tab_index] = [[]]
+
+
+
 
 def checkIfWinner(table):
     winnerCol = [True, True, True, True, True]
@@ -44,4 +55,3 @@ for line in lines[2:]:
 
 print(playBingo(inputs, tables))
 
-#16674
