@@ -13,7 +13,7 @@ def count_commons(values, index):
 lines = list(map(lambda x: x[:-1], open('3\input.txt').readlines()))
 
 
-oxygen_lines = lines.copy()
+oxygen_lines = lines[:]
 index = 0
 while len(oxygen_lines) > 1:
     common = count_commons(oxygen_lines, index)
@@ -21,7 +21,7 @@ while len(oxygen_lines) > 1:
     
     index+=1
     
-co2_lines = lines.copy()
+co2_lines = lines[:]
 index = 0
 while len(co2_lines) > 1:
     common = count_commons(co2_lines, index)
