@@ -10,14 +10,20 @@ def parse_input(file_name):
     return inputs
 
 def mark_lines(map, lines):
-    for el in only_horizontal_or_vertical:
-        max_x = max(el[0], el[2])
-        min_x = min(el[0], el[2])
-        for x in range(min_x, max_x+1):
-            max_y = max(el[1], el[3])
-            min_y = min(el[1], el[3])
-            for y in range(min_y, max_y+1):
+    for el in lines:
+        is_diagonal = el[0] != el[2] and el[1] != el[3]
+        reverse_x = el[0] > el[2] 
+        step_x = -1 if reverse_x else 1
+        offset_y = 0
+        for x in range(el[0], el[2]+step_x, step_x):
+            reverse_y = el[1] > el[3]
+            step_y = -1 if reverse_y else 1
+            for y in range(el[1]+(offset_y)*step_y, el[3]+step_y, step_y):
                 map[x][y] += 1
+                if is_diagonal:
+                    offset_y += 1
+                    break;
+
 
 def count_result(map):
     result = 0
@@ -30,10 +36,7 @@ def count_result(map):
 
 inputs = parse_input('5/input.txt')
 
-only_horizontal_or_vertical = list(filter(lambda x: x[0] == x[2] or x[1] == x[3], inputs))
-
 _map = [[0]*1000 for i in range(1000)]
-mark_lines(_map, only_horizontal_or_vertical)
+mark_lines(_map, inputs)
 
 print(count_result(_map))
-#7318
