@@ -20,31 +20,35 @@ def is_local_min(map, x, y):
             return False
     return True
 
-def calc_basin_size(map, x, y, mode=0):
+def calc_basin_size(map, x, y, start=True):
     max_x = len(map)-1
     max_y = len(map[0])-1
-        
-    if mode != 0 and map[x][y] == 0:
-        return 0 
 
-    total = 1
-    map[x][y] = 0
+    total = 0
+    to_discover=[(x, y)]
 
-    if mode != 2 and x > 0:
-        if map[x-1][y] < 9:
-            total += calc_basin_size(map, x-1, y, 1)
+    while to_discover:
+        el = to_discover.pop()
+        x = el[0]
+        y = el[1]
+        if not start and map[x][y] == 0:
+            continue
+        start = False
 
-    if mode != 1 and x < max_x:
-        if map[x+1][y] < 9:
-            total += calc_basin_size(map, x+1, y, 2)
+        map[x][y] = 0
+        total += 1
 
-    if mode != 4 and y > 0:
-        if map[x][y-1] < 9:
-            total += calc_basin_size(map, x, y-1, 3)
+        if x > 0 and map[x-1][y] not in [0, 9]:
+            to_discover.append((x-1, y))
 
-    if mode != 3 and y < max_y:
-        if map[x][y+1] < 9:
-            total += calc_basin_size(map, x, y+1, 4)
+        if x < max_x and map[x+1][y] not in [0, 9]:
+            to_discover.append((x+1, y))
+
+        if y > 0 and map[x][y-1] not in [0, 9]:
+            to_discover.append((x, y-1))
+
+        if y < max_y and map[x][y+1] not in [0, 9]:
+            to_discover.append((x, y+1))
     
     return total
 
@@ -68,3 +72,5 @@ for min in mins:
 
 basins.sort(reverse=True)
 print(basins[0]*basins[1]*basins[2])
+
+#931200
