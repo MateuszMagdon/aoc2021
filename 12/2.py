@@ -58,3 +58,4 @@ def find_paths(graph, current_name, path=[]):
 graph = get_input('12/input.txt')
 all_paths = find_paths(graph, 'start')
 print(len(all_paths))
+#131228
